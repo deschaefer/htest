@@ -3,7 +3,7 @@ include "../init.php";
 $db = DB::getInstance();
 $settings = $db->query("SELECT * FROM settings")->first();
 
-if (!isset($user) || (!in_array($user->data()->id, $master_account))) {
+if (!in_array($user->data()->id, $master_account)) {
   die("Permission denied");
 }
 $type = Input::get('type');
@@ -14,9 +14,6 @@ $reserved = Input::get('reserved');
 $api = "https://userspice.com/bugs/api.php";
 
 $zipFile = "temp.zip";
-if(file_exists($abs_us_root.$us_url_root."users/parsers/".$zipFile)){
-  unlink($abs_us_root.$us_url_root."users/parsers/".$zipFile);
-}
 if ($type == 'plugin') {
   $extractPath = "../../usersc/plugins";
   $reserved = Input::get('reserved');

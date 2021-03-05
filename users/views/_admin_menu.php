@@ -1,5 +1,4 @@
 <!doctype html>
-<head>
 <?php
 $page=currentFile();
 $titleQ = $db->query('SELECT title FROM pages WHERE page = ?', array($page));
@@ -9,9 +8,12 @@ if ($titleQ->count() > 0) {
 else $pageTitle = '';
 ?>
 <title><?= (($pageTitle != '') ? $pageTitle : ''); ?> <?=$settings->site_name?></title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+<meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="css/dashboard/normalize.css">
   <link rel="stylesheet" href="css/dashboard/bootstrap.min.css">
   <link rel="stylesheet" href="<?=$us_url_root?>users/fonts/css/font-awesome.min.css">
@@ -202,11 +204,7 @@ function activeDropdown($View, $dropId, $Area = false){
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>
-    <footer>
-        <p align="center" >
-          <font color='white'><br>&copy;<?=date('Y '); ?><?=$settings->copyright; ?></font>
-        </p>
-    </footer>
+
   </aside><!-- /#left-panel -->
 
   <!-- Left Panel -->

@@ -182,13 +182,6 @@ $token = Token::generate();
   <?php echo resultBlock($errors,$successes); ?>
 
   <h2>Configure Details for Permission Level: <?=$permissionDetails['name']?></h2><br>
-  <?php if($permissionId == 1 || $permissionId  == 2){ ?>
-    <b>
-      <font color="red">WARNING:</font>
-    </b>
-    Although you can rename this permission level, please do not try to change its purpose.  #1 is the default "User" permission for all users and #2 is the "Admin"
-    permission. Changing the purpose of these permissions <b>WILL</b> break things.<br><br>
-  <?php } ?>
   <form name='adminPermission' action='admin.php?view=permission&id=<?=$permissionId?>' method='post'>
     <div class="row">
       <div class="col-sm-12">
@@ -302,7 +295,7 @@ $token = Token::generate();
             <?php } ?>
           </div>
           <div class="tab-pane fade" id="RemovePagesTab" role="tabpanel" aria-labelledby="RemovePages">
-            <h3>Remove Pages <input type="checkbox" value="1" id="removeAll"></h3>
+            <h3>Remove Pages</h3>
             <strong>Remove these pages from <?php echo ucfirst($permissionDetails['name']);?></strong>
             <?php
             //Display list of pages with this access level
@@ -312,13 +305,12 @@ $token = Token::generate();
             }
             foreach ($pageData as $v1){
               if(in_array($v1->id,$page_ids)){ ?>
-                <br><label class="normal"><input type='checkbox' name='removePage[]' class='removePage' id='removePage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
+                <br><label class="normal"><input type='checkbox' name='removePage[]' id='removePage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
               <?php }
             }  ?>
           </div>
           <div class="tab-pane fade" id="AddPagesTab" role="tabpanel" aria-labelledby="AddPages">
-            <h3>Add Pages <input type="checkbox" value="1" id="addAll"></h3>
-
+            <h3>Add Pages</h3>
             <strong>Add these pages to <?php echo ucfirst($permissionDetails['name']);?></strong>
             <?php
             //Display list of pages with this access level
@@ -328,10 +320,10 @@ $token = Token::generate();
                 $countQ = $db->query("SELECT id, permission_id FROM permission_page_matches WHERE page_id = ? ",array($v1->id));
                 $countCountQ = $countQ->count();
                 if(!in_array($v1->id,$page_ids) && $v1->private == 1 && !$countCountQ >=1){ ?>
-                  <br><label class="normal"><input type='checkbox' name='addPage[]' class='addPage' id='addPage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
+                  <br><label class="normal"><input type='checkbox' name='addPage[]' id='addPage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
                 <?php } } else {
                   if(!in_array($v1->id,$page_ids) && $v1->private == 1){ ?>
-                    <br><label class="normal"><input type='checkbox' name='addPage[]' class='addPage' id='addPage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
+                    <br><label class="normal"><input type='checkbox' name='addPage[]' id='addPage[]' value='<?=$v1->id;?>'> <?=$v1->page;?></label>
                   <?php } }
                 }  ?>
 
@@ -376,12 +368,3 @@ $token = Token::generate();
         <!-- End of main content section -->
       </form>
     </div>
-<script type="text/javascript">
-$("#addAll").change(function(){
-  $('.addPage').prop('checked', this.checked);
-});
-
-$("#removeAll").change(function(){
-  $('.removePage').prop('checked', this.checked);
-});
-</script>

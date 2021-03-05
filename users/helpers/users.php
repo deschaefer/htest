@@ -5,12 +5,12 @@
 
 //Check if a user ID exists in the DB
 if (!function_exists('userIdExists')) {
-    function userIdExists(int $id)
+    function userIdExists($id)
     {
         $db = DB::getInstance();
         $query = $db->query('SELECT * FROM users WHERE id = ?', [$id]);
         $num_returns = $query->count();
-        if ($num_returns == 1) {
+        if ($num_returns > 0) {
             return true;
         } else {
             return false;
@@ -20,14 +20,14 @@ if (!function_exists('userIdExists')) {
 
 //Retrieve information for all users
 if (!function_exists('fetchAllUsers')) {
-    function fetchAllUsers($orderBy = null, $desc = false, $disabled = true)
+    function fetchAllUsers($orderBy = [], $desc = [], $disabled = true)
     {
         $db = DB::getInstance();
         $q = 'SELECT * FROM users';
         if (!$disabled) {
             $q .= ' WHERE permissions=1';
         }
-        if ($orderBy !== null) {
+        if (!empty($orderBy)) {
             if ($desc === true) {
                 $q .= " ORDER BY $orderBy DESC";
             } else {
@@ -88,21 +88,13 @@ if (!function_exists('deleteUsers')) {
 }
 
 if (!function_exists('echouser')) {
-    function echouser($id, $echoType = null)
+    function echouser($id)
     {
         $db = DB::getInstance();
+        $settingsQ = $db->query('SELECT echouser FROM settings');
+        $settings = $settingsQ->first();
 
-        $id = (int) $id;
-
-        if ($echoType !== null) {
-            $echoType = (int) $echoType;
-        } else {
-            $settingsQ = $db->query('SELECT echouser FROM settings');
-            $settings = $settingsQ->first();
-            $echoType = $settings->echouser;
-        }
-
-        if ($echoType == 0) {
+        if ($settings->echouser == 0) {
             $query = $db->query('SELECT fname,lname FROM users WHERE id = ? LIMIT 1', [$id]);
             $count = $query->count();
             if ($count > 0) {
@@ -113,7 +105,7 @@ if (!function_exists('echouser')) {
             }
         }
 
-        if ($echoType == 1) {
+        if ($settings->echouser == 1) {
             $query = $db->query('SELECT username FROM users WHERE id = ? LIMIT 1', [$id]);
             $count = $query->count();
             if ($count > 0) {
@@ -124,7 +116,7 @@ if (!function_exists('echouser')) {
             }
         }
 
-        if ($echoType == 2) {
+        if ($settings->echouser == 2) {
             $query = $db->query('SELECT username,fname,lname FROM users WHERE id = ? LIMIT 1', [$id]);
             $count = $query->count();
             if ($count > 0) {
@@ -135,7 +127,7 @@ if (!function_exists('echouser')) {
             }
         }
 
-        if ($echoType == 3) {
+        if ($settings->echouser == 3) {
             $query = $db->query('SELECT username,fname FROM users WHERE id = ? LIMIT 1', [$id]);
             $count = $query->count();
             if ($count > 0) {
@@ -145,16 +137,16 @@ if (!function_exists('echouser')) {
                 echo 'Unknown';
             }
         }
-        if ($echoType == 4) {
-            $query = $db->query('SELECT fname,lname FROM users WHERE id = ? LIMIT 1', [$id]);
-            $count = $query->count();
-            if ($count > 0) {
-                $results = $query->first();
-                echo ucfirst($results->fname).' '.substr(ucfirst($results->lname), 0, 1);
-            } else {
-                echo 'Unknown';
-            }
-        }
+        if($settings->echouser == 4){
+         $query = $db->query("SELECT fname,lname FROM users WHERE id = ? LIMIT 1",array($id));
+         $count=$query->count();
+         if ($count > 0) {
+           $results=$query->first();
+           echo ucfirst($results->fname)." ".substr(ucfirst($results->lname),0,1);
+         } else {
+           echo "Unknown";
+         }
+       }
     }
 }
 
@@ -217,22 +209,6 @@ if (!function_exists('isAdmin')) {
             return true;
         } else {
             return false;
-        }
-    }
-}
-
-if (!function_exists('name_from_id')) {
-    function name_from_id($id)
-    {
-        $db = DB::getInstance();
-        $query = $db->query('SELECT username FROM users WHERE id = ? LIMIT 1', [$id]);
-        $count = $query->count();
-        if ($count > 0) {
-            $results = $query->first();
-
-            return ucfirst($results->username);
-        } else {
-            return '-';
         }
     }
 }

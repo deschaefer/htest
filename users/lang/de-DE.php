@@ -9,7 +9,7 @@ you to update it and thank you for your hard work!
 
 PLEASE NOTE: DO NOT ADD RANDOM KEYS in the middle of the translations.  In order to make it easier to tell what language keys are missing, from this point forward, we are going to add all new language keys at the BOTTOM of this file. The number of lines in your language file will tell you which keys still need to be translated.  If you have questions please ask on the forums or on Discord.
 
-UserSpice
+UserSpice 5
 An Open Source PHP User Management System
 by the UserSpice Team at http://UserSpice.com
 
@@ -103,6 +103,8 @@ $lang = array_merge($lang,array(
 		"GEN_UPDATED"			=> "aktualisiert",
 		"GEN_UPDATE"			=> "Aktualisieren",
 		"GEN_BY"					=> "bei",
+		"GEN_ENABLE"			=> "Aktivieren",
+		"GEN_DISABLE"			=> "Deaktivieren",
 		"GEN_FUNCTIONS"		=> "Funktionen",
 		"GEN_NUMBER"			=> "Zahl",
 		"GEN_NUMBERS"			=> "Zahlen",
@@ -271,7 +273,7 @@ $lang = array_merge($lang,array(
 		"EML_HI"				=> "Hi ",
 		"EML_AD_HAS"		=> "Ein Administrator hat ihr Passwort zurückgesetz.",
 		"EML_AC_HAS"		=> "Ein Administrator hat ihren Account angelegt.",
-		"EML_REQ"				=> "Sie müssen ihr Passwort über den oben angegebenen Link setzen.",
+		"EML_REQ"				=> "You will be required to set your password using the link above.",
 		"EML_EXP"				=> "Bitte beachten, der Passwort Link verfällt in ",
 		"EML_VER_EXP"		=> "Bitte beachten, der Verifizierunglink  verfällt in ",
 		"EML_CLICK"			=> "Klicke hier zum Login.",
@@ -332,7 +334,7 @@ $lang = array_merge($lang,array(
 		"ERR_PW_SAME"			=> "Das neue Passwort muss anders als das alte Passwort sein.",
 		"ERR_PW_FAIL"			=> "Altes Passwort stimmt nicht. Aktualisierung fehlgeschlagen. Bitte erneut versuchen.",
 		"ERR_GOOG"				=> "<strong>Hinweis:</strong> Falls Sie sich mit Ihrem Google/Facebook Konto registriert haben, müssen sie den - Passwort vergessen - Link benutzen, um Ihr Passwort zu ändern, es sei denn, dass Sie richtig gut raten können",
-		"ERR_EM_VER"			=>  "Email&uuml;berpr&uuml;fung ist nicht aktiviert. Bitte Systemadministrator kontaktieren.",
+		"ERR_EM_VER"			=> "Email&uuml;berfr&uuml;fung ist nich aktiviert. Bitte Systemadministrator kontaktieren.",
 		"ERR_EMAIL_STR"		=> "Etwas stimmt nicht. Emailadresse bitte überprüfen. Entschuldigung sie die Unannehmlichkeit.",
 		));
 

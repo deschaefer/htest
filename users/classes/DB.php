@@ -107,25 +107,20 @@ class DB {
 				}
 			}
 
-			try {
-			    if ($this->_query->execute()) {
-			        if ($this->_query->columnCount() > 0) {
-			            $this->_results = $this->_query->fetchALL(PDO::FETCH_OBJ);
-			            $this->_resultsArray = json_decode(json_encode($this->_results),true);
-			        }
-			        $this->_count = $this->_query->rowCount();
-			        $this->_lastId = $this->_pdo->lastInsertId();
-			    } else{
-			        $this->_error = true;
-			        $this->_results = [];
-			        $this->_errorInfo = $this->_query->errorInfo();
-			    }
-			} catch (PDOException $e) {
-			    $this->_error = true;
-			    $this->_results = [];
-			    $this->_errorInfo = $e->getMessage();
+			if ($this->_query->execute()) {
+				if ($this->_query->columnCount() > 0) {
+					$this->_results = $this->_query->fetchALL(PDO::FETCH_OBJ);
+					$this->_resultsArray = json_decode(json_encode($this->_results),true);
+				}
+				$this->_count = $this->_query->rowCount();
+				$this->_lastId = $this->_pdo->lastInsertId();
+			} else{
+				$this->_error = true;
+				$this->_results = [];
+				$this->_errorInfo = $this->_query->errorInfo();
 			}
 		}
+
 		return $this;
 	}
 
