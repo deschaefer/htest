@@ -22,8 +22,6 @@ for($i = 1; $i < $self_path_length; $i++){
 
 require_once $abs_us_root.$us_url_root.'users/helpers/helpers.php';
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
 $host = getenv('DB_HOST');
 $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
