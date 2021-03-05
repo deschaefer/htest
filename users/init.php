@@ -24,10 +24,10 @@ require_once $abs_us_root.$us_url_root.'users/helpers/helpers.php';
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$db = substr($url["path"], 1);
+$host = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$db = getenv('DB_NAME');
 
 // Set config
 $GLOBALS['config'] = array(
