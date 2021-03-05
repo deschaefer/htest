@@ -22,20 +22,27 @@ for($i = 1; $i < $self_path_length; $i++){
 
 require_once $abs_us_root.$us_url_root.'users/helpers/helpers.php';
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
 // Set config
 $GLOBALS['config'] = array(
 	'mysql'      => array(
-'host'         => 'db',
-'username'     => 'hvac',
-'password'     => 'hvac',
-'db'           => 'hvac',
+'host'         => $host,
+'username'     => $username,
+'password'     => $password,
+'db'           => $db,
 ),
 'remember'        => array(
-  'cookie_name'   => 't9p1K1zoQvS4Ks0RyKzw',
+  'cookie_name'   => getenv('HVAC_COOKIE_NAME'), //t9p1K1zoQvS4Ks0RyKzw',
   'cookie_expiry' => 604800  //One week, feel free to make it longer
 ),
 'session' => array(
-  'session_name' => 'RWV3QYhoBHiinnhdr1Z6',
+  'session_name' => getenv('HVAC_SESSION_NAME'), //'RWV3QYhoBHiinnhdr1Z6',
   'token_name' => 'token',
 )
 );
