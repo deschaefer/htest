@@ -18,6 +18,19 @@ final class CreateTheDatabase extends AbstractMigration
      */
     public function change(): void
     {
+        // inserting only one row
+        $singleRow = [
+            'id'    => 100,
+            'user_id'  => 1,
+            'logdate' => now(),
+            'logtype' => 'User',
+            'lognote' => 'from migration',
+            '127.0.0.1'
+        ];
+
+        $table = $this->table('logs');
+        $table->insert($singleRow);
+        $table->saveData();
 
     }
 }
