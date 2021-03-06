@@ -25,7 +25,7 @@ final class TestMigration2 extends AbstractMigration
             'logdate' => date('Y-m-d H:i:s'),
             'logtype' => 'User',
             'lognote' => 'from migration',
-            '127.0.0.1'
+            'ip' => '127.0.0.1'
         ];
 
         $table = $this->table('logs');
