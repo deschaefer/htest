@@ -22,7 +22,7 @@ final class TestMigration2 extends AbstractMigration
         $singleRow = [
             'id'    => 101,
             'user_id'  => 1,
-            'logdate' => date(),
+            'logdate' => date('Y-m-d H:i:s'),
             'logtype' => 'User',
             'lognote' => 'from migration',
             '127.0.0.1'
